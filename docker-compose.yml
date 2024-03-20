@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  app:
+    container_name: express_app
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=Asdrt325698dsa
+      - DATABASE_NAME=employeeDB
+  db:
+    container_name: mysql_db
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'employeeDB'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'Asdrt325698dsa'
+      MYSQL_ROOT_PASSWORD: 'Asdrt325698dsa'
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./initDB.sql:/docker-entrypoint-initdb.d/init-db.sql
+volumes:
+  db_data:
