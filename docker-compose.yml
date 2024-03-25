@@ -8,11 +8,17 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    # command: ["sh", "-c", "./wait-for-it.sh db:3306 -- npm start"]
+    entrypoint: ["./wait-for-it.sh", "db:3306", "--", "npm", "start"]
+    # command: [ "npm", "start" ]
+    # command: ["sh", "-c", "./wait-for-it.sh -t db:3306 -- npm start"]
     environment:
       - DATABASE_HOST=db
       - DATABASE_USER=root
       - DATABASE_PASSWORD=Asdrt325698dsa
       - DATABASE_NAME=employeeDB
+    networks:
+      - my_network
   db:
     container_name: mysql_db
     image: mysql:5.7
@@ -27,5 +33,11 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ./initDB.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - my_network
 volumes:
   db_data:
+
+networks:
+  my_network:
+    driver: bridge

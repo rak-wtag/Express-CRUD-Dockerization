@@ -23,7 +23,7 @@ router.delete('/:id', async (req,res)=>{
     if (deletedEmployee==0)
         res.status(404).json('no record with given id: '+ req.params.id)
     else
-        res.Status(100).json(`Deleted ${req.params.id}`)
+        res.status(100).json(`Deleted ${req.params.id}`)
 })
 
 

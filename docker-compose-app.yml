@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  app:
+    container_name: express_app
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=Asdrt325698dsa
+      - DATABASE_NAME=employeeDB
+    networks:
+      - seperate_network
+
+networks:
+  seperate_network:
+    name: seperate_network
+    external: true
