@@ -6,6 +6,11 @@
     "mysql2": "^3.9.2"
   },
   "scripts": {
-    "start": "node index.js"
+    "build": "webpack",
+    "prod": "node dist/final.js"
+  },
+  "devDependencies": {
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
   }
 }
